@@ -29,7 +29,7 @@ def get_stock_data(beautiful_soup_result, search_str, root, tick, data_str):
 
 
 def stock_info(prop_index=0):
-    ticker_file = r"C:\Users\Ryan\PycharmProjects\Rule1\tickers\{}.csv"
+    ticker_file = r"tickers\{}.csv"
     prop = np.asarray(map(lambda s: s.replace('"', ''),
                           np.genfromtxt(ticker_file.format(
                               "nasdaq_companylist"), dtype="S32", skip_header=1,
@@ -53,7 +53,7 @@ def stock_info(prop_index=0):
 site = (r"https://online.investools.com/authentication/auth.iedu?logout="
         "true&brandLogoImage=identifier_investortoolbox")
 site_root = r"https://toolbox.investools.com/graphs/fundamentalAnalysis"
-file_root = r"C:\Users\Ryan\PycharmProjects\Rule1\stock_data\\"
+file_root = r"stock_data\\"
 
 cj = cookielib.CookieJar()
 br = mechanize.Browser()
@@ -65,15 +65,13 @@ br.form['userid'] = r"rap4yd@gmail.com"
 br.form['password'] = r"WedQ!t^2%ZE79ws"
 br.submit()
 
-n = 1
-num_tick = 6332
-tickers = np.asarray(["AAPL", "GOOG", "GOOGL"])
-# tickers = stock_info(prop_index=0)[n * int(num_tick / 20): (n + 1) *
-#                                    int(num_tick / 20)]
+offset_start = 0
+tickers = stock_info(prop_index=0)[offset_start:3]
 
 for i, ticker in enumerate(tickers):
     ticker = ticker.strip()
-    print("{:04.1f}%, {}".format((i + 1) / tickers.shape[0] * 100, ticker))
+    print("{}, {:05.2f}%, {}".format(i + offset_start, (i + 1) /
+                                     tickers.shape[0] * 100, ticker))
 
     site_income_statement = r"{}.iedu?report=IS&symbol={}".format(site_root,
                                                                   ticker)
