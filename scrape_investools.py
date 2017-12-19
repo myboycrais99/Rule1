@@ -5,53 +5,41 @@ investools is required. This script then uses cookies to log in and scrap the
 relevant data. The income statements, balance sheets, cash flow, and trend
 analysis pages are scraped and saved to the local machine for later analysis.
 """
-from __future__ import division, print_function
-import mechanize
+
+import mechanicalsoup
 from bs4 import BeautifulSoup
 import numpy as np
 import time
-
-try:
-    # For Python 3.0 and later
-    import http.cookiejar
-except ImportError:
-    # For Python 3.0 and later
-    import cookielib
+import http.cookiejar
 
 
-    def get_stock_data(beautiful_soup_result, search_str, root, tick, data_str):
-        for txt in beautiful_soup_result:
 
-            if search_str in str(txt):
-                data = str(txt)
-                filename = r"{}{}_{}.html".format(root, tick, data_str)
+def get_stock_data(beautiful_soup_result, search_str, root, tick, data_str):
+    for txt in beautiful_soup_result:
 
-                with open(filename, "w") as f:
-                    f.write(data)
+        if search_str in str(txt):
+            data = str(txt)
+            filename = r"{}{}_{}.html".format(root, tick, data_str)
 
-                break
+            with open(filename, "w") as f:
+                f.write(data)
 
-    def stock_info(prop_index=0):
-        ticker_file = r"tickers\{}.csv"
-        prop = np.asarray(map(lambda s: s.replace('"', ''),
-                              np.genfromtxt(ticker_file.format(
-                                  "nasdaq_companylist"), dtype="S32",
-                                  skip_header=1, delimiter='",',
-                                  comments='##')[:, prop_index]))
+            break
 
-        prop = np.append(prop, map(lambda s: s.replace('"', ''),
-                                   np.genfromtxt(ticker_file.format(
-                                       "nyse_companylist"), dtype="S32",
-                                       skip_header=1, delimiter='",',
-                                       comments='##')[:, prop_index]))
 
-        # prop = np.append(prop, map(lambda s: s.replace('"', ''),
-        #                            np.genfromtxt(ticker_file.format(
-        #                                "amex_companylist"), dtype="S32",
-        #                                skip_header=1, delimiter='",',
-        #                                comments='##')[:, prop_index]))
+def stock_info(prop_index=0):
+    ticker_file = r"tickers\{}.csv"
 
-        return prop
+    prop = np.genfromtxt(ticker_file.format(
+        "nasdaq_companylist"), dtype="S32",
+        skip_header=1, delimiter='",',
+        comments='##')[:, prop_index]
+
+    prop = [s.decode("utf-8") for s in prop]
+
+    prop = np.asarray([s.replace('"', '') for s in prop])
+
+    return prop
 
 
 def main():
@@ -61,15 +49,16 @@ def main():
     site_root = r"https://toolbox.investools.com/graphs/fundamentalAnalysis"
     file_root = r"stock_data\\"
 
-    cj = cookielib.CookieJar()
-    br = mechanize.Browser()
+    cj = http.cookiejar.CookieJar()
+    br = mechanicalsoup.StatefulBrowser()
     br.set_cookiejar(cj)
     br.open(site)
 
     br.select_form(nr=0)
-    br.form['userid'] = r"rap4yd@gmail.com"
-    br.form['password'] = r"WedQ!t^2%ZE79ws"
-    br.submit()
+    br['userid'] = r"rap4yd@gmail.com"
+    br['password'] = r"WedQ!t^2%ZE79ws"
+
+    br.submit_selected()
 
     offset_start = 0
     tickers = stock_info(prop_index=0)[offset_start:3]
@@ -88,13 +77,13 @@ def main():
         site_trend_analysis = r"{}/trendAnalysis.iedu?symbol={}".format(
             site_root, ticker)
 
-        income_statement = BeautifulSoup(br.open(site_income_statement).read(),
+        income_statement = BeautifulSoup(br.open(site_income_statement).content,
                                          "html.parser")
-        balance_sheet = BeautifulSoup(br.open(site_balance_sheet).read(),
+        balance_sheet = BeautifulSoup(br.open(site_balance_sheet).content,
                                       "html.parser")
-        cash_flow = BeautifulSoup(br.open(site_cash_flow).read(),
+        cash_flow = BeautifulSoup(br.open(site_cash_flow).content,
                                   "html.parser")
-        trend_analysis = BeautifulSoup(br.open(site_trend_analysis).read(),
+        trend_analysis = BeautifulSoup(br.open(site_trend_analysis).content,
                                        "html.parser")
 
         search_string = "Values in Millions of $"
@@ -109,6 +98,7 @@ def main():
                        file_root, ticker, data_str="trend_analysis")
 
         time.sleep(0.1)
+
 
 if __name__ == "__main__":
     main()
