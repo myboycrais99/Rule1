@@ -7,7 +7,6 @@ Rule #1.
 
 from datetime import datetime
 from bs4 import BeautifulSoup
-from scrape_investools import stock_info
 import numpy as np
 
 try:
@@ -89,15 +88,11 @@ def get_stock_data(tick, data_str):
 
 def main():
     """The main function"""
-    tickers = ["AAPL", "GOOG", "GOOGL"]
-    # tickers = tickers[1]
-
-    # offset_start = 0
-    # tickers = stock_info(prop_index=0)[offset_start:3]
+    tickers = ["AMZN", "AAPL", "GOOG", "GOOGL"]
 
     stocks = dict()
 
-    for ticker in tickers[0:1]:
+    for ticker in tickers[1:2]:
         print(ticker)
 
         stocks[ticker] = dict(
@@ -119,9 +114,8 @@ def main():
         )
         print("\n\tROIC:", roic)
 
-
-
         print("\n\tSales:", stocks[ticker]["Revenue Total"])
+
         print("\tSales Growth Rate:",
               stocks[ticker]["Revenue Total"][1:] /
               stocks[ticker]["Revenue Total"][:-1] - 1)
@@ -130,17 +124,34 @@ def main():
                stocks[ticker]["Preferred Dividends"]) /
                stocks[ticker]["Diluted Weighted Average Shares"])
         print("\n\tEPS:", eps)
+
         print("\tEPS Growth Rate:", eps[1:] / eps[:-1] - 1)
 
         bvps = (stocks[ticker]["Total Equity"] /
                 stocks[ticker]["Total Common Shares Outstanding"])
+
         print("\n\tEquity:", bvps)
+
         print("\tEquity Growth Rate:", bvps[1:] / bvps[:-1] - 1)
 
         print("\n\tCash:", stocks[ticker]["Free Cash Flow"])
+
         print("\tCash Growth Rate:",
               stocks[ticker]["Free Cash Flow"][1:] /
               stocks[ticker]["Free Cash Flow"][:-1] - 1)
+
+        # save_csv(stocks[ticker])
+
+
+def save_csv(stock):
+    filename = "investools.csv"
+    with open(filename, "w") as f:
+        for key, val in enumerate(stock):
+            f.write(val + "\t")
+
+            for i in stock[val]:
+                f.write(str(i) + "\t")
+            f.write("\n")
 
 
 if __name__ == "__main__":

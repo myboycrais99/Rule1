@@ -1,0 +1,123 @@
+accounting_change	Accounting Change	BIGINT
+accounts_payable	Accounts Payable	BIGINT
+accounts_receivable	Accounts Receivable - Trade Net	BIGINT
+accrued_expenses	Accrued Expenses	BIGINT
+accum_depr_total	Accumulated Depreciation Total	BIGINT
+acq_of_business	Acquisition of Business	BIGINT
+addit_paid_cap	Additional Paid-In Capital	BIGINT
+basic_eps_excl_extra_items	Basic EPS Excluding Extraordinary Items	DOUBLE(15,4)
+basic_eps_incl_extra_items	Basic EPS Including Extraordinary Items	DOUBLE(15,4)
+basic_eps_pre_stock	Basic EPS pre Stock Based Exp.	BIGINT
+basic_norm_eps	Basic Normalized EPS	DOUBLE(15,4)
+basic_weight_avg_shares	Basic Weighted Average Shares	BIGINT
+capital_expend	Capital Expenditures	BIGINT
+capital_lease	Capital Lease Obligations	BIGINT
+cash	Cash	BIGINT
+cash_and_equiv	Cash and Equivalents	BIGINT
+cash_and_short_term_invest	Cash and Short Term Investments	BIGINT
+cash_from_financing	Cash from Financing Activities	BIGINT
+cash_from_investing	Cash from Investing Activities	BIGINT
+cash_from_operating	Cash from Operating Activities	BIGINT
+cash_interest_paid	Cash Interest Paid	BIGINT
+cash_payments	Cash Payments	BIGINT
+cash_taxes_paid	Cash Taxes Paid	BIGINT
+change_work_capital	Changes in Working Capital	BIGINT
+common_stock_total	Common Stock Total	BIGINT
+cost_of_revenue	Cost of Revenue	BIGINT
+curr_lt_debt_vs_capital_leases	Current Port. of LT Debt vs Capital Leases	BIGINT
+current_ratio	Current Ratio	DOUBLE(15,4)
+debt_vs_equity	Debt vs Equity	BIGINT
+deferred_income_tax	Deferred Income Tax	BIGINT
+deferred_tax	Deferred Taxes	BIGINT
+deprec_supp	Depreciation Supplemental	BIGINT
+deprec_vs_amort	Depreciation vs Amortization	BIGINT
+deprec_vs_delplet	Depreciation vs Depletion	BIGINT
+diluted_eps_excl_extra_items	Diluted EPS Excluding Extraordinary Items	DOUBLE(15,4)
+diluted_eps_incl_extra_items	Diluted EPS Including Extraordinary Items	DOUBLE(15,4)
+diluted_eps_pre_stock	Diluted EPS pre Stock Based Exp.	DOUBLE(15,4)
+diluted_norm_eps	Diluted Normalized EPS	DOUBLE(15,4)
+diluted_weight_avg_shares	Diluted Weighted Average Shares	BIGINT
+dilution_adjust	Dilution Adjustment	BIGINT
+discont_operations	Discontinued Operations	BIGINT
+dividend_per_share_common	Dividends per Share - Common Stock Primary Issue	BIGINT
+effect_special_items_inc_tax	Effect of Special Items on Income Taxes	BIGINT
+equity_in_affiliates	Equity In Affiliates	BIGINT
+extra_items	Extraordinary Item	BIGINT
+financing_cash_flow	Financing Cash Flow Items	BIGINT
+foreign_exch_effects	Foreign Exchange Effects	BIGINT
+gain_loss_sale_assets	Gain (Loss) on Sale of Assets	BIGINT
+goodwill_net	Goodwill Net	BIGINT
+gross_dividends_common	Gross Dividends - Common Stock	BIGINT
+gross_profit	Gross Profit	BIGINT
+gross_profit_margin	Gross Profit Margin	DOUBLE(15,4)
+income_tax_ex_impact_spec_items	Income Taxes Ex. Impact of Special Items	BIGINT
+income_avail_common_excl_extra	Income Available to Common Excl. Extra Items	BIGINT
+income_avail_common_incl_extra	Income Available to Common Incl. Extra Items	BIGINT
+income_tax_total	Income Tax - Total	BIGINT
+income_tax_payable	Income Taxes Payable	BIGINT
+intangibles_net	Intangibles Net	BIGINT
+interest_expense_net_operating	Interest Expense Net Operating	BIGINT
+interest_inc_net_non_operating	Interest Inc. Net Non-Operating	BIGINT
+interest_income_expense_net_non_operating	Interest Income (Exp.), Net NonOp	BIGINT
+interest_vs_invest_inc_non_operating	Interest vs Invest Inc. Non-Operating	BIGINT
+issuance_retire_of_debt_net	Issuance (Retirement) of Debt Net	BIGINT
+issuance_retire_of_stock_net	Issuance (Retirement) of Stock Net	BIGINT
+long_term_debt	Long Term Debt	BIGINT
+long_term_investments	Long Term Investments	BIGINT
+minority_interest	Minority Interest	BIGINT
+net_change_cash	Net Change in Cash	BIGINT
+net_debt_vs_total_cap	Net Debt vs Total Cap	BIGINT
+net_income	Net Income	BIGINT
+net_income_after_tax	Net Income After Taxes	BIGINT
+net_income_before_extra	Net Income Before Extra. Items	BIGINT
+net_income_before_taxes	Net Income Before Taxes	BIGINT
+net_income_post_stock_based_exp	Net Income post Stock Based Exp.	BIGINT
+net_income_vs_starting_line	Net Income vs Starting Line	BIGINT
+net_profit_margin	Net Profit Margin	DOUBLE(15,4)
+non_cash_items	Non-Cash Items	BIGINT
+pref_stock_non_redeem_net	Preferred Stock - Non Redeemable Net	BIGINT
+norm_income_avail_common	Normalized Income Avail to Common	BIGINT
+norm_income_after_taxes	Normalized Income After Taxes	BIGINT
+norm_income_before_taxes	Normalized Income Before Taxes	BIGINT
+notes_payable_vs_short_term_debt	Notes Payable vs Short Term Debt	BIGINT
+operating_income	Operating Income	BIGINT
+other_curr_assets_total	Other Current Assets Total	BIGINT
+other_curr_liabilities_total	Other Current Liabilities Total	BIGINT
+other_equity_total	Other Equity Total	BIGINT
+other_invest_cash_flow_items_total	Other Investing Cash Flow Items Total	BIGINT
+other_liabilities_total	Other Liabilities Total	BIGINT
+other_long_term_assets_total	Other Long Term Assets Total	BIGINT
+other_net	Other Net	BIGINT
+preferred_dividends	Preferred Dividends	BIGINT
+prepaid_expenses	Prepaid Expenses	BIGINT
+property_plant_equipment_gross	Property Plant and Equipment - Gross	BIGINT
+property_plant_equipment_net	Property Plant and Equipment - Net	BIGINT
+quick_ratio	Quick Ratio	DOUBLE(15,4)
+redeem_pref_stock_total	Redeemable Preferred Stock Total	BIGINT
+research_and_development	Research and Development	BIGINT
+retained_earnings_accum_deficit	Retained Earnings (Accumulated Deficit)	BIGINT
+revenue	Revenue	BIGINT
+revenue_other	Revenue Other	BIGINT
+revenue_total	Revenue Total	BIGINT
+roe	ROE	DOUBLE(15,4)
+sales	Sales	BIGINT
+selling_gen_admin_expenses	Selling Gen. Admin Expenses	BIGINT
+shares_out_common_stock_prim	Shares Outs - Common Stock Primary Issue	BIGINT
+short_term_investments	Short Term Investments	BIGINT
+total_assets	Total Assets	BIGINT
+total_cash_dividends_paid	Total Cash Dividends Paid	BIGINT
+total_comm_shares_out	Total Common Shares Outstanding	BIGINT
+total_curr_assets	Total Current Assets	BIGINT
+total_curr_liabilities	Total Current Liabilities	BIGINT
+total_debt	Total Debt	BIGINT
+total_equity	Total Equity	BIGINT
+total_inventory	Total Inventory	BIGINT
+total_liabilities	Total Liabilities	BIGINT
+total_liabilities_and_shareholder_equity	Total Liabilities and Shareholder Equity	BIGINT
+total_long_term_debt	Total Long Term Debt	BIGINT
+total_operating_expenses	Total Operating Expense	BIGINT
+total_receivables_net	Total Receivables Net	BIGINT
+total_short_term_borrow	Total Short Term Borrowings	BIGINT
+total_special_items	Total Special Items	BIGINT
+treasury_stock_common	Treasury Stock - Common	BIGINT
+unusual_expense	Unusual Expense	BIGINT
