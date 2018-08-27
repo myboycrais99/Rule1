@@ -282,28 +282,28 @@ if __name__ == "__main__":
 
     tickers = ["AAPL"]
 
-    # for tick in tickers:
-    #
-    #     bob = Stock(tick)
-    #
-    #     print("Ticker: ", bob.ticker)
-    #     print("Reporting Month: ", bob.statement_month)
-    #     print("EPS: ", bob.eps)
-    #     print("Cash Flow: ", bob.cash_flow)
-    #     # print("Equity: ", bob.equity)
-    #     # print("Shares Out: ", bob.shares_out)
-    #     print("BVPS: ", bob.bvps)
-    #     print("Sales: ", bob.sales)
-    #     # print("Long Debt: ", bob.total_long_debt)
-    #     # print("Net Income: ", bob.net_income)
-    #     print("ROIC: ", bob.roic)
-    #
-    #     print("\n\n")
+    for tick in tickers:
 
-    response = requests.get("https://financialmodelingprep.com/api/financials/income-statement/AAPL")
-    #
-    # import re
-    # data = json.loads(re.sub('<[^<]+?>', '', response.text))
-    #
-    # print(data)
-    print(type(response.text))
+        bob = Stock(tick)
+
+        print("Ticker: ", bob.ticker)
+        print("Reporting Month: ", bob.statement_month)
+        print("EPS: ", bob.eps)
+        print("Cash Flow: ", bob.cash_flow)
+        # print("Equity: ", bob.equity)
+        # print("Shares Out: ", bob.shares_out)
+        print("BVPS: ", bob.bvps)
+        print("Sales: ", bob.sales)
+        # print("Long Debt: ", bob.total_long_debt)
+        # print("Net Income: ", bob.net_income)
+        print("ROIC: ", bob.roic)
+
+        print("\n\n")
+
+    # response = requests.get("https://financialmodelingprep.com/api/financials/income-statement/AAPL")
+    # #
+    # # import re
+    # # data = json.loads(re.sub('<[^<]+?>', '', response.text))
+    # #
+    # # print(data)
+    # print(type(response.text))
