@@ -68,6 +68,7 @@ def get_dates(page, tag="thead", date_format="%Y-%m-%d"):
     """
 
     date_list = list()
+    print(page)
     trs = page.find_all(tag)[-1]
     for tds in trs.find_all("th"):
         tmp = str(tds.contents[0]).replace("\n", "")

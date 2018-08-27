@@ -17,7 +17,7 @@ except ImportError:
     from urllib.request import urlopen
 
 
-def open_file(tick, data_str, root=""):
+def open_file(tick: str, data_str: str, root="") -> BeautifulSoup:
     """This function takes in a stock ticker and the type of financial form
     and returns a beautiful soup object."""
     income_statement = r"{}stock_data/{}_{}.html".format(root, tick, data_str)
@@ -26,7 +26,7 @@ def open_file(tick, data_str, root=""):
         return BeautifulSoup(fil, "html.parser")
 
 
-def get_stock_data(tick, data_str):
+def get_stock_data(tick: str, data_str: str) -> dict:
     """This function opens the 10-year stock data specified by 'data_str' for
     the passed stock ticker. Once open, the function parses the HTML data and
     returns a dictionary with keys taken from the first column of the website
@@ -116,29 +116,33 @@ def main():
 
         print("\n\tSales:", stocks[ticker]["Revenue Total"])
 
-        print("\tSales Growth Rate:",
-              stocks[ticker]["Revenue Total"][1:] /
-              stocks[ticker]["Revenue Total"][:-1] - 1)
+        # print("\tSales Growth Rate:",
+        #       stocks[ticker]["Revenue Total"][1:] /
+        #       stocks[ticker]["Revenue Total"][:-1] - 1)
 
         eps = ((stocks[ticker]["Net Income"] -
                stocks[ticker]["Preferred Dividends"]) /
                stocks[ticker]["Diluted Weighted Average Shares"])
         print("\n\tEPS:", eps)
 
-        print("\tEPS Growth Rate:", eps[1:] / eps[:-1] - 1)
+        # print("\tEPS Growth Rate:", eps[1:] / eps[:-1] - 1)
 
         bvps = (stocks[ticker]["Total Equity"] /
                 stocks[ticker]["Total Common Shares Outstanding"])
 
+        # print("\n\tequity:", stocks[ticker]["Total Equity"])
+        # print("\n\toutstanding shares:", stocks[ticker]["Total Common Shares Outstanding"])
+
         print("\n\tEquity:", bvps)
 
-        print("\tEquity Growth Rate:", bvps[1:] / bvps[:-1] - 1)
+        # print("\tEquity Growth Rate:", bvps[1:] / bvps[:-1] - 1)
 
-        print("\n\tCash:", stocks[ticker]["Free Cash Flow"])
+        # print("\n\tCash:", stocks[ticker]["Free Cash Flow"])
+        print("\n\tCash:", stocks[ticker]["Cash From Operating Activities"])
 
-        print("\tCash Growth Rate:",
-              stocks[ticker]["Free Cash Flow"][1:] /
-              stocks[ticker]["Free Cash Flow"][:-1] - 1)
+        # print("\tCash Growth Rate:",
+        #       stocks[ticker]["Free Cash Flow"][1:] /
+        #       stocks[ticker]["Free Cash Flow"][:-1] - 1)
 
         # save_csv(stocks[ticker])
 
