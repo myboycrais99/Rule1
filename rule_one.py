@@ -1,54 +1,95 @@
 """
 
 """
-
+import rule_one_db
 import rule_one_utils
-import logging.config
-from multiprocessing.dummy import Pool as ThreadPool
+# import logging.config
+
 # from multiprocessing import Pool
+import numpy as np
 import time
 
-logging.config.fileConfig('logging.conf')
-logger = logging.getLogger('RuleOneLogger')
+# logging.config.fileConfig('logging.conf')
+# logger = logging.getLogger('RuleOneLogger')
+
+
 
 
 if __name__ == "__main__":
 
-    tickers = ["AAPL", "GOOG", "BRK.B", "MRK", "DDD", "NFLX", "AMZN"]
+    logger = rule_one_utils.RuleOneLogger().logger
 
-    # bob = rule_one_utils.ScrapeBarchartBalanceSheetHTML("AAPL")
-    # print(bob.data)
-    # cat = rule_one_utils.ScrapeTDAmeritradeHTML("AAPL")
-    # print(cat.data)
+    tickers = ["AAPL", "GOOG", "BRK.B", "MRK", "DDD", "CEM", "WPXP", "ARES",
+               "NFLX", "AMZN", "RTN", "BA", "BAC", "GOOGL", "ADT", "AEO",
+               "AET", "AJRD", "AMC", "ANF", "AZO", "BAH", "BB", "BBY",
+               "BGG", "BUD", "CAT", "ZBK", "FAX", "WPXP", "MITT^A", "ALP^O",
+               "BML^G", "GS^N"]
 
-    if True:
+    bob = rule_one_db.RuleOneDatabase(host='localhost', db='rule1_devdb',
+                                      user='ryan', password='password')
 
-        # make the Pool of workers
-        pool = ThreadPool(len(tickers))
+    # ans, dt = rule_one_utils.function_to_multithread(rule_one_utils.CalcEPS,
+    #                                                  tickers[:10])
+    # for ii in ans:
+    #     if bool(ii.eps):
+    #         if not np.isnan(ii.eps):
+    #             print("{} {:.2f} - Confidence: {}\n".format(ii.ticker, ii.eps,
+    #                                                         ii.confidence))
+    # print("\nEPS for {} tickers calculated in {:.3f} seconds"
+    #       "".format(len(ans), dt))
 
-        start_time = time.time()
-        # results = pool.map(rule_one_utils.ScrapeTDAmeritradeHTML,
-        #                    tickers)
+    import multiprocessing
+    from multiprocessing.dummy import Pool as ThreadPool
+    from functools import partial
 
-        results = pool.map(rule_one_utils.ScrapeFinancialModelingPrepJSON,
-                           tickers)
 
-        pool.close()
-        pool.join()
 
-        # print(results[0].ticker, results[0].data)
-        print("\n\nThreaded Total Time: {}".format(time.time() - start_time))
 
-        for ii in results:
-            try:
-                print(ii.ticker, ii.data["Net income"], ii.report_month)
-            except KeyError:
-                print("ERROR: ", ii.ticker)
 
-    # dog = rule_one_utils.ScrapeIEXTradingFinancialsJSON("WMT")
-    # print(dog.status_code, dog.data["currentAssets"], dog.data)
 
-    # pig = rule_one_utils.ScrapeFinancialModelingPrepJSON("NFLX")
-    # print(pig.data)
+    # start_time = time.time()
+    # pool = ThreadPool(3)
+    # results = pool.map(partial(rule_one_utils.CalcEPS, year=2017,
+    #                            redundancy=2), tickers[0:10])
+    #
+    # # results = pool.map(partial(rule_one_utils.ScrapeMorningStarHTML,
+    # #                            statements=["cash", "balance"]), tickers[0:10])
+    #
+    # pool.close()
+    # pool.join()
+    #
+    # for ii in results:
+    #     if bool(ii.eps):
+    #         if not np.isnan(ii.eps):
+    #             print("{} {:.2f} - Confidence: {}\n"
+    #                   "".format(ii.ticker, ii.eps, ii.confidence))
+    #
+    # print("\nEPS for {} tickers calculated in {:.3f} seconds"
+    #       "".format(len(results), time.time()-start_time))
+
+
+
+    # tmp = rule_one_utils.ScrapeMorningStarHTML(tickers[0],
+    #                                            statements=["cash", "balance"])
+    #
+    # print(tmp.data)
+
+    start_time = time.time()
+    pool = ThreadPool(10)
+    results = pool.map(partial(rule_one_utils.ScrapeMorningStarHTML,
+                               statements=["cash"]), tickers[:10])
+
+    pool.close()
+    pool.join()
+
+    print("\nMorningStart data for {} tickers fetched in {:.3f} seconds"
+          "".format(len(results), time.time()-start_time))
 
     pass
+
+    # data = bob.get_stocks(active=True)
+    # print(data[:3], "\n\n", len(data), 6852)
+
+
+
+
